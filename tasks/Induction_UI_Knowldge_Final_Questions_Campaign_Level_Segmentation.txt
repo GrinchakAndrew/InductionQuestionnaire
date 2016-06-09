@@ -1,0 +1,557 @@
+<script type="text/javascript">
+    function Config() {
+        var config = {
+            altCol: {
+                '': {
+                    'state': {
+                        'click': 0,
+                        'keyup': 0
+                    },
+                    '_config': null,
+                    'src': "",
+                    'width': '40%',
+                    'enlargeToWidth': 45,
+                    'left': 30
+                }
+			},
+            getter: function(alt, _config, src, width, enlargeToWidth, left) {
+                if (_config && alt) {
+                    return config.altCol[alt] && config.altCol[alt]['_config'] ? config.altCol[alt]['_config'] : null;
+                } else if (!_config && alt && !src && !width && !enlargeToWidth && !left) {
+                    if (config.altCol[alt]) {
+                        return config.altCol[alt] && config.altCol[alt]['state'] ? config.altCol[alt]['state'] : null;
+                    } else {
+                        return false;
+                    }
+                } else if (!arguments.length) {
+                    return Object.keys(config.altCol);
+                } else if (alt && src) {
+                    return config.altCol[alt] && config.altCol[alt]['src'] ? config.altCol[alt]['src'] : null;
+                } else if (alt && width) {
+                    return config.altCol[alt] && config.altCol[alt]['width'] ? config.altCol[alt]['width'] : null;
+                } else if (alt && enlargeToWidth) {
+                    return config.altCol[alt] && config.altCol[alt]['enlargeToWidth'] ? config.altCol[alt]['enlargeToWidth'] : null;
+                } else if (alt && left) {
+                    return config.altCol[alt] && config.altCol[alt]['left'] ? config.altCol[alt]['left'] : null;
+                }
+            },
+
+            setter: function(alt, val, _config) {
+                if (_config && alt) {
+                    !config.altCol[alt]['_config'] ? config.altCol[alt]['_config'] = _config : '';
+                } else if (alt && val) {
+                    if (({}).toString.call(val) === '[object Object]') {
+                        for (var i in val) {
+                            config.altCol[alt]['state'][i] = val[i];
+                        }
+                    }
+                }
+            },
+
+            domReady: function(callback) {
+                config.eventsBinder(document, 'DOMContentLoaded', callback);
+                config.eventsBinder(document, 'onreadystatechange', function() {
+                    if (document.readyState === 'complete') {
+                        callback();
+                    }
+                });
+                config.eventsBinder(window, 'load', callback);
+            },
+
+            eventsBinder: function(El, event, handler) {
+                if (El && El.addEventListener) {
+                    El.addEventListener(event, handler);
+                } else if (El && El.attachEvent) {
+                    El.attachEvent('on' + event, handler);
+                }
+            },
+
+            eventsUnbinder: function(El, event, handler) {
+                if (El && El.removeEventListener) {
+                    El.removeEventListener(event, handler);
+                }
+
+                if (El && El.detachEvent) {
+                    El.detachEvent('on' + event, handler);
+                }
+            },
+
+            constructor: function(targetEl, _e, _g, s, _u) {
+                var _config = {
+                    documentCreateElement: function(El, id, style, text) {
+                        var returnable;
+                        if (El) {
+                            returnable = document.createElement(El);
+                            id ? returnable.id = id : '';
+                            if (style && ({}).toString.call(style) === '[object Array]') {
+                                for (var i = style.length; i--;) {
+                                    if (({}).toString.call(style[i]) === '[object Object]') {
+                                        for (var j in style[i]) {
+                                            returnable.style[j] = style[i][j];
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (text && ({}).toString.call(text) === '[object String]') {
+                                returnable['innerText' in returnable ? 'innerText' : 'innerHTML'] = text;
+                            }
+                        }
+                        return returnable;
+                    },
+                    appendOpacityDivToBody: function() {
+
+                        document.body.appendChild(_config.documentCreateElement('div', 'OpacityDivToBody', [{
+                            'backgroundColor': '#000'
+                        }, {
+                            'bottom': '0'
+                        }, {
+                            'left': '0'
+                        }, {
+                            'opacity': '0.7'
+                        }, {
+                            'position': 'fixed'
+                        }, {
+                            'right': '0'
+                        }, {
+                            'top': '0'
+                        }, {
+                            'zIndex': '9999'
+                        }]));
+                    },
+
+                    scroller: function(e) {
+                        var event = window.event || e,
+                            delta = event.detail ? event.detail * (-120) : event.wheelDelta,
+                            subRoutine = function(d) {
+                                var handledImageContainer = document.querySelector('#handledImageContainer');
+                                if (d >= 120 && handledImageContainer) {
+                                    handledImageContainer.style.width = parseInt(handledImageContainer.style.width.match(/\d+/)) + 1 + '%';
+                                }
+                                if (d <= -120 && handledImageContainer) {
+                                    handledImageContainer.style.width = parseInt(handledImageContainer.style.width.match(/\d+/)) - 1 + '%';
+                                }
+                            };
+                        if (delta && event.ctrlKey) {
+                            subRoutine(delta);
+                        }
+                        return false;
+                    },
+
+                    arrowPress: function(e) {
+                        var event = e || window.event,
+                            handledImageContainer = document.querySelector('#handledImageContainer'),
+                            leftDefaultValue = handledImageContainer ? _g(handledImageContainer.querySelector('img').alt, '', '', '', '', 1) : null,
+                            imageParentNodeEnlargedWidth = handledImageContainer ? _g(handledImageContainer.querySelector('img').alt, '', '', '', 1) : null;
+
+                        switch (event.keyCode.toString()) {
+
+                            case '38':
+                                {
+                                    handledImageContainer ? handledImageContainer.style.top =
+                                        parseInt(handledImageContainer.style.top.match(/[-]?\d+/)) - 1 + '%' : null;
+                                    break;
+                                }
+
+                            case '40':
+                                {
+                                    handledImageContainer ? handledImageContainer.style.top =
+                                        parseInt(handledImageContainer.style.top.match(/[-]?\d+/)) + 1 + '%' : null;
+                                    break;
+                                }
+                            case '37' || '':
+                                {
+									if(handledImageContainer) {
+										!handledImageContainer.style.left ||
+                                        parseInt(handledImageContainer.style.left.match(/[-]?\d+/)) > leftDefaultValue ?
+                                        handledImageContainer.style.left = leftDefaultValue + '%' : handledImageContainer.style.left;
+										handledImageContainer.style.left = parseInt(handledImageContainer.style.left.match(/[-]?\d+/)) - 1 + '%';
+									}
+								
+                                    
+                                    break;
+                                }
+
+                            case '39':
+                                {
+									if(handledImageContainer) {
+										!handledImageContainer.style.left ||
+                                        parseInt(handledImageContainer.style.left.match(/[-]?\d+/)) < leftDefaultValue ?
+                                        handledImageContainer.style.left = leftDefaultValue + '%' : handledImageContainer.style.left;
+										handledImageContainer.style.left =
+                                        parseInt(handledImageContainer.style.left.match(/[-]?\d+/)) + 1 + '%';
+									
+									}
+									
+                                    
+                                    break;
+                                }
+                            case '48':
+                                {
+                                    if (handledImageContainer && event.ctrlKey) {
+                                        parseInt(handledImageContainer.style.width.match(/[-]?\d+/)) > imageParentNodeEnlargedWidth ||
+                                            parseInt(handledImageContainer.style.width.match(/[-]?\d+/)) < imageParentNodeEnlargedWidth ?
+                                            handledImageContainer.style.width = imageParentNodeEnlargedWidth + '%' : '';
+                                        parseInt(handledImageContainer.style.left.match(/[-]?\d+/)) !== leftDefaultValue ?
+                                            handledImageContainer.style.left = leftDefaultValue + '%' : '';
+                                    }
+                                    break;
+                                }
+                            case '187':
+                                {
+                                    if (handledImageContainer && event.ctrlKey) {
+                                        handledImageContainer.style.width = parseInt(handledImageContainer.style.width.match(/\d+/)) + 1 + '%';
+                                    }
+                                    break;
+                                }
+
+                            case '189':
+                                {
+                                    if (handledImageContainer && event.ctrlKey) {
+                                        handledImageContainer.style.width = parseInt(handledImageContainer.style.width.match(/\d+/)) - 1 + '%';
+                                    }
+                                    break;
+                                }
+                        }
+                    },
+
+                    handler: function(e) {
+                        var _e = e || event,
+                            executable,
+                            _ex = e.target,
+                            subRoutine = function(eventType) {
+
+                                var OpacityDivToBody = document.getElementById('OpacityDivToBody');
+                                if (OpacityDivToBody) {
+                                    OpacityDivToBody.parentNode.removeChild(OpacityDivToBody);
+                                }
+                                if (document.querySelector('#main') && document.querySelector('#handledImageContainer')) {
+                                    document.querySelector('#main').removeChild(document.querySelector('#handledImageContainer'));
+                                }
+
+                                _u(_ex, eventType, _config.handler);
+                                _u(document, event.type, _config.scroller);
+                                _u(window, eventType, _config.handler);
+
+                                var a = {};
+                                a[eventType.toString()] = 0;
+                                s(targetEl.alt, a);
+                            };
+
+                        if (_e.type === 'keyup' | 'onkeyup') {
+                            executable = function() {
+                                if (_e.keyCode.toString() === '27') {
+                                    subRoutine(_e.type);
+                                }
+                            };
+                        } else if (_e.type === 'click' | 'onclick') {
+                            executable = function() {
+                                subRoutine(_e.type);
+                            };
+                        }
+                        executable();
+                    },
+
+                    handleImageContainer: function() {
+                        if (targetEl) {
+                            if (!document.getElementById('handledImageContainer')) {
+
+                                var _el = _config.documentCreateElement('div', 'handledImageContainer', [{
+                                        'display': 'block'
+                                    }, {
+                                        'width': _g(targetEl.alt, '', '', '', 1) + '%'
+                                    }, {
+                                        'position': 'fixed'
+                                    }, {
+                                        'zIndex': '10001'
+                                    }, {
+                                        'top': '5%'
+                                    }, {
+                                        'background': '#FFF'
+                                    }, {
+                                        'text-align': 'center'
+                                    }, {
+                                        'left': (_g(targetEl.alt, '', '', '', '', 1) + '%') ? (_g(targetEl.alt, '', '', '', '', 1) + '%') : 0
+                                    }]),
+                                    _ex = _config.documentCreateElement('div', '', [{
+                                        'background-image': "url('https://maxymiserbpos.sharepoint.com/sites/ua/training/Shared%20Documents/InductionAssets/close.png')"
+                                    }, {
+                                        'position': 'absolute'
+                                    }, {
+                                        'display': 'inline-block'
+                                    }, {
+                                        'background-repeat': 'no-repeat'
+                                    }, {
+                                        'cursor': 'pointer'
+                                    }, {
+                                        'height': '45px'
+                                    }, {
+                                        'width': '40px'
+                                    }, {
+                                        'padding-left': '1%'
+                                    }, {
+                                        'background-size': '100% 100%'
+                                    }, {
+                                        'background-position-x': '-4px'
+                                    }, {
+                                        'background-position-y': '-7px'
+                                    }], ''),
+                                    imgClone,
+                                    mousewheelEvt = (/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel";
+
+                                imgClone = targetEl.cloneNode();
+                                imgClone.style.width = '95%';
+                                imgClone.style.marginLeft = '0';
+                                imgClone.style.paddingTop = '8px';
+
+                                document.getElementById('main').appendChild(_el);
+                                _el.appendChild(imgClone);
+                                _el.appendChild(_ex);
+
+                                if (!_g(targetEl.alt)['mousewheelEvt']) {
+                                    s(targetEl.alt, {
+                                        'mousewheelEvt': 1
+                                    });
+                                    _e(document, mousewheelEvt, _config.scroller);
+                                }
+
+                                s(targetEl.alt, {
+                                    'click': 1
+                                });
+
+                                _e(_ex, 'click', function(e) {
+                                    _config.handler(e);
+                                });
+
+                                if (!_g(targetEl.alt)['keyup']) {
+                                    s(targetEl.alt, {
+                                        'keyup': 1
+                                    });
+                                    _e(window, 'keyup', function(e) {
+                                        _config.handler(e);
+                                    });
+                                }
+
+                                if (!_g(targetEl.alt)['arrowPress']) {
+                                    s(targetEl.alt, {
+                                        'arrowPress': 1
+                                    });
+                                    _e(window, 'keydown', _config.arrowPress);
+                                }
+
+                                if (!document.querySelector('#OpacityDivToBody')) {
+                                    _config.appendOpacityDivToBody();
+                                }
+                            }
+                        }
+                    },
+                    onclickHandler: function() {
+                        _config.handleImageContainer();
+                    }
+                };
+
+                return {
+                    o: _config.onclickHandler
+                }
+            }
+        };
+
+        return {
+            d: config.domReady,
+            e: config.eventsBinder,
+            u: config.eventsUnbinder,
+            s: config.setter,
+            g: config.getter,
+            F: config.constructor
+        }
+    };
+
+    var config = new Config();
+    config.g().forEach(function(i) {
+		if(i) {
+			var img = new Image(),
+            parent = document.querySelector('#' + i);
+			img.alt = i;
+			img.src = config.g(i, '', 1);
+			img.style.cursor = 'pointer';
+			img.style.width = config.g(i, '', '', 1);
+			parent ? parent.appendChild(img) : null;
+		}
+    });
+
+    config.e(document, 'click', function(e) {
+        var event = e || event,
+            target = event.target || event.srcElement;
+        if ((target.tagName === 'IMG' && config.g(target.alt))) {
+            if (!config.g(target.alt, 1)) {
+                var _config = new config.F(target, config.e, config.g, config.s, config.u);
+                config.s(target.alt, '', _config);
+            }
+            if (config.g(target.alt, 1)) {
+                config.g(target.alt, 1).o();
+            }
+        }
+    });
+
+    config.e(document, 'click',
+        function(e) {
+            var _config = {
+                    targetAttributes: {
+                        _title: [{
+                            '': ['', ""]
+                        }]
+                    }
+                },
+                event = e || event,
+                _target = event.target || event.srcElement;
+
+            _config.targetAttributes._title.forEach(function(i, j) {
+                Object.keys(i).forEach(function(_i) {
+                    if (_target.attributes['_title'] && _i === _target['attributes']['_title'].value) {
+                        var keyVal = _config['targetAttributes']['_title'][j][_i],
+							simulate_mouse_events = function(node, mouseEvent) {
+                                                        var options,
+                                                            oEvent;
+                                                        options = {
+                                                            pointerX: 0,
+                                                            pointerY: 0,
+                                                            clientX: 0,
+                                                            clientY: 0,
+                                                            button: 0,
+                                                            ctrlKey: false,
+                                                            altKey: false,
+                                                            shiftKey: false,
+                                                            metaKey: false,
+                                                            bubbles: true,
+                                                            cancelable: true
+                                                        };
+                                                        if (document.createEvent) {
+                                                            oEvent = document.createEvent('MouseEvents');
+                                                            oEvent.initMouseEvent(mouseEvent, options.bubbles, options.cancelable, document.defaultView, options.button, options.pointerX, options.pointerY, options.pointerX, options.pointerY, options.ctrlKey, options.altKey, options.shiftKey, options.metaKey, options.button, node);
+                                                            node.dispatchEvent(oEvent);
+                                                        } else {
+                                                            var msEvent = document.createEventObject();
+                                                            for (var eventPropName in options) {
+                                                                msEvent[eventPropName] = options[eventPropName];
+                                                            }
+                                                            node.fireEvent('on' + mouseEvent, msEvent);
+                                                        }
+                                                    };
+                        if (typeof keyVal === 'string') {
+                            Array.prototype.forEach.call(document.querySelectorAll('.tabs-li'),
+                                function(q) {
+                                    var span = q.querySelector('span'),
+                                        spanText = span['innerText' in span ? 'innerText' : 'innerHTML'];
+                                    if (spanText === keyVal) {
+										simulate_mouse_events(q, 'click');
+                                    }
+                                });
+                        } else if (({}).toString.call(keyVal) === '[object Array]') {
+                            var titleCol = document.querySelectorAll('.title');
+                            Array.prototype.forEach.call(titleCol, function(i, j) {
+                                debugger;
+                                if (i['innerText' in i ? 'innerText' : 'innerHTML'] === keyVal[0] ||
+                                    i['innerText' in i ? 'innerText' : 'innerHTML'].match(keyVal[0])
+                                ) {
+                                    simulate_mouse_events(i, 'click');
+                                    setTimeout(function() {
+                                        Array.prototype.forEach.call(document.querySelectorAll('.tabs-li'),
+                                            function(y) {
+                                                var span = y.querySelector('span'),
+                                                    spanText = span['innerText' in span ? 'innerText' : 'innerHTML'];
+                                                if (spanText === keyVal[1]) {
+													simulate_mouse_events(y, 'click');
+                                                    return;
+                                                }
+                                            }
+                                        );
+                                    }, 500);
+                                }
+                            })
+                        }
+                    }
+                })
+            });
+        }
+    );
+</script>
+
+<div id="main" style="font-size: 10pt; font-family: arial, helvetica, sans-serif;">
+    <div style="margin-left: auto; margin-right: auto; width: 98%;">
+        <table style="width: 100%; border: 2px; margin-left: auto; margin-right: auto; font-size: 16px;">
+            <tbody>
+                <tr>
+                    <th valign="middle" style="height: 2em; font-weight: bold; text-align: center; color:#900000; padding: 1px;   vertical-align: middle;">Questionnaire:</th>
+                </tr>
+                <tr>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+	<div style="margin-left: auto; margin-right: auto; height: 2em; font-size: 16px; color: #333399; width: 98%; text-align: center;">
+        <div style="margin-top: 0.5em;">Induction Plan: Overall Questionnaire</div>
+    </div>
+	<div style="margin-left: auto; margin-right: auto; border: 1px solid #6690bc; width: 98%; text-align: center;">
+        <span style="text-align: center; line-height: 30px; color: #6690bc; font-size: 17px;">UI Knowledge: Campaign Level Segmentation Rules</span>
+        <table style="margin: 0px auto; width: 94%;">
+            <tbody>
+                <tr>
+						<td colspan="3" style="width: 28px; text-align: left; padding-left: 30px;">
+							<p><span style="line-height: 1.5em; color: #000000; font-size: 10pt;">
+								<ul style="list-style-type: none;"> 						
+									<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">  
+												<ol>
+													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
+														Please funnel users, who haven't visited site for as long as half a year to a year, to our test campaign. How should we do this?
+													</li>
+													
+													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
+													Segment Rule is set for a user from UK on MacOS. 
+													Will the user fall into the Segment, if he is from the UK, but not on currently on the MacOS? 
+													</li>
+													
+													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
+														In Campaigns settings under Elements and Variants, 
+														it has been configured that the weight of the Default Variant is 0, 
+														while in the segment settings this experience has been included: 
+														will users segmented by this Segmentation Rule see this Experience? 
+													</li>
+													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
+														What is 'Calculate Once' option in Segment Rules?
+													</li>
+													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
+														What will happen if a Visitor meets 3 segmentation rules out of 5, available on the level of Campaign? 
+													</li>
+													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
+														Can the user change segment when he was already in segment?
+													</li>
+													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
+														If a <b>Visitor</b> satisfied the <b>Segmentation Rules</b>, 
+														while the First Rule does not have <b>Calculate Once</b>, 
+														the <b>Second Rule</b> is set to 
+														<b>Calculate once</b>, 
+														and the Third Rule does not have the <b>Calculate Once</b>. 
+														Which <b>Segment Rule</b> will the Visitor fall under? 
+													</li>
+													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
+														45% of traffic is set in Segment. Is this percentage of all the users who saw our campaign or all the users who get into the Segment?
+													</li>
+													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
+														Which segment should have higher order: Men from UK or users from UK to make them work both?
+													</li>
+													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
+														Can several segments have the same order?
+													</li>
+												</ol>
+									</li>
+								</ul>
+								</span>
+							 </p>
+					</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>
+        </p>
+    </div> 
+ </div>
