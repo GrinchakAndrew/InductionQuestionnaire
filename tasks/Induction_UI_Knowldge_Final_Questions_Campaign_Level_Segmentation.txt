@@ -481,7 +481,7 @@
         <table style="width: 100%; border: 2px; margin-left: auto; margin-right: auto; font-size: 16px;">
             <tbody>
                 <tr>
-                    <th valign="middle" style="height: 2em; font-weight: bold; text-align: center; color:#900000; padding: 1px;   vertical-align: middle;">Questionnaire:</th>
+                    <th valign="middle" style="height: 2em; font-weight: bold; text-align: center; color:#900000; padding: 1px;   vertical-align: middle;"></th>
                 </tr>
                 <tr>
                 </tr>
@@ -489,10 +489,10 @@
         </table>
     </div>
 	<div style="margin-left: auto; margin-right: auto; height: 2em; font-size: 16px; color: #333399; width: 98%; text-align: center;">
-        <div style="margin-top: 0.5em;">Induction Plan: Overall Questionnaire</div>
+        <div style="margin-top: 0.5em;">UI Knowledge: Campaign Level Segmentation Rules</div>
     </div>
 	<div style="margin-left: auto; margin-right: auto; border: 1px solid #6690bc; width: 98%; text-align: center;">
-        <span style="text-align: center; line-height: 30px; color: #6690bc; font-size: 17px;">UI Knowledge: Campaign Level Segmentation Rules</span>
+        <span style="text-align: center; line-height: 30px; color: #6690bc; font-size: 17px;"></span>
         <table style="margin: 0px auto; width: 94%;">
             <tbody>
                 <tr>

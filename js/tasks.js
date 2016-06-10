@@ -9,8 +9,7 @@
 							}
 						},
 						{"Personalisation Criteria" : {"Personalisation Criteria Knowledge: Questions" : "tasks/Induction_Questionnaire_Overall_PCs.txt"}},
-						{"MaxRecommend and Data Feeds" : {
-								"Recommendation Campaigns: Questions" : "tasks/Induction_Questionnaire_Overall_Recommend.txt",
+						{"Data Feeds" : {
 								"Data Feeds: Questions" : "tasks/Induction_Questionnaire_Overall_Data_Feeds.txt"
 							}
 						},

@@ -4,7 +4,6 @@ body {
 #myDiv {
 	top: 0;
     position: static;
-	background-color: rgb(240, 240, 240);
 	height: 25px;
 	width : 75%;
 	margin-left : 13.6%;
@@ -18,7 +17,7 @@ body {
 	font-size: 12px;
 }
 .accordeon-wrapper {
-	margin: 3%;
+	margin-top: 2%;
 }
 	.columniser .columniser-text {
 		display: inline-block;
@@ -105,7 +104,7 @@ body {
 }
 
 .columniser {
-		width: 90%;
+		/* width: 90%; */
 		border-bottom: 2px solid #C51F00;
 	}
 .header {
@@ -268,7 +267,7 @@ body {
 		padding-right: 9%;
 	}
 	.columniser {
-		padding-left: 12%;
+		padding-left: 10%;
 	}
  }
  @media only screen  and (min-width : 1224px) {
@@ -288,7 +287,7 @@ body {
 		padding-right: 9%;
 	}
 	.columniser {
-		padding-left: 12%;
+		padding-left: 10%;
 	}
 }
 

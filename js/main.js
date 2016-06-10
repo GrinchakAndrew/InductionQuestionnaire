@@ -37,7 +37,7 @@ Accordeon.prototype.scroller = function() {
             if (macOS) {
                 return this.vertical_position < 0;
             } else {
-                return this.vertical_position >= 109;
+                return this.vertical_position >= 150;
             }
         },
         append: function() {
@@ -1109,7 +1109,7 @@ $('document').ready(function() {
         $('.title').on(eventName, function(e) {
             'use strict';
             tabsNames = [];
-            $('.columniser').css('border-bottom', 'initial');
+            /* $('.columniser').css('border-bottom', 'initial'); */
             $('body').trigger('title-change');
             $('.details-body-code')[0]['innerText' in $('.details-body-code')[0] ? 'innerText' : 'innerHTML'] ? $('.details-body-code')[0]['innerText' in $('.details-body-entrails')[0] ? 'innerText' : 'innerHTML'] = '' : null;
             $('.details-body-description')[0]['innerText' in $('.details-body-code')[0] ? 'innerText' : 'innerHTML'] ? $('.details-body-description')[0]['innerText' in $('.details-body-code')[0] ? 'innerText' : 'innerHTML'] = '' : null;
@@ -1137,6 +1137,7 @@ $('document').ready(function() {
                 }
             }
             if (text in tabsNumberByKey && tabsNumberByKey[text]) {
+				$('.columniser').css('border-bottom', 'initial');
                 if (Object.prototype.toString.call(jsonObject[text]) === '[object Object]') {
                     for (var j in jsonObject[text]) {
                         tabsNames.push(j);
@@ -1185,9 +1186,6 @@ $('document').ready(function() {
                     'style': 'float: left; display: inline-block; width: 0; height: 0; border-top-width: 7px; border-top-style: solid; border-top-color: rgba(0, 0, 0, 0); border-bottom-width: 10px; border-bottom-style: solid; border-bottom-color: rgba(0, 0, 0, 0); border-right-width: 10px; border-right-style: solid; border-right-color: #6690BC;'
                 }));
                 $('.titles-column-left').css('display', 'none');
-                $('.details-body').css({
-                    'margin-left': '9.5%'
-                });
                 $('.scrolling-right').css({
                     'left': ''
                 });
