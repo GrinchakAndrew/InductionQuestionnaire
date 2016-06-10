@@ -490,7 +490,7 @@
     </div>
 	
 	<div style="margin-left: auto; margin-right: auto; height: 2em; font-size: 16px; color: #333399; width: 98%; text-align: center;">
-        <div style="margin-top: 0.5em;">Account Administration</div>
+        <div style="margin-top: 0.5em;">CD API Usage and Methods</div>
     </div>
 	
 	<div style="margin-left: auto; margin-right: auto; border: 1px solid #6690bc; width: 98%; text-align: center;">
@@ -508,8 +508,7 @@
 													</li>
 													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
 														How do you use campaign 'scope' in order to share data between several scripts on the level of campaign? 
-														(this could be some data collected on the Default variant to implement the re-design).
-														Which methods would you apply to use Apply Campaign and its methods to share data between Campaign and Site levels
+														(this could be some data collected on the Default variant to implement your re-design).
 													</li>
 													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
 														Which methods would you apply to use campaign's persistent storage for data saving? 
@@ -521,11 +520,8 @@
 														Is it possible to switch between synchronous and asynchronous CG Requests in the CD API? 
 													</li>
 													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
-														Why do we need the Dual CGRequests Schema (checker-script and async campaign generation 
-														in the 2-nd CG Request)? And how will you make the Dual CGRequests Schema in the CD API?
-													</li>
-													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
-														On what condition you could be able to implement the Dual CGRequests schema synchronously in one CG Request?
+														Why do we need checker-scripts and async campaign generation in the 2-nd CG Request? 
+														And how will you make it in the CD API?
 													</li>
 													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
 														Explain campaign rendering, its components and implementation with CD API, including the rendering fallback. 
@@ -539,7 +535,7 @@
 														Refer to the: 'when' Deferred method for the answer. 
 													</li>
 													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
-														Which arguments does the when function accept?
+														Which arguments does the '<b>when</b>' function accept?
 													</li>
 													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
 														How do you track only 'non-unique', i.e. 'multiple' actions, with the CD API?
@@ -560,25 +556,30 @@
 														How will you implement single action count against Page Refresh? 
 													</li>
 													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
-														Provide all of the methods to handle asynchronous processes via CD API.
+														Provide all of the methods to make flow control via CD API.
 													</li>
 													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
-														Explain how to work with CD API in hybrid state with the mmcore.js: what are the necessary customizations?
-														Please refer to the hybridized CD API <a href="http://service.maxymiser.net/cdn/conversioninteriors/js/mmcore.js">here</a>.
-													</li>
-													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
-														'WaitFor' method in CD API: provide usage example via CD API as part of rendering
-													</li>
-													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
-														Provide all possible methods to avoid if-else multiple conditions in your code.
+														'waitForElement' method in CD API: provide usage example via CD API as part of rendering
 													</li>
 													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
 														How do you provide debugging possibilities with CD API module in your browser Dev. tools?
 													</li>
 													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
-														How do you provide extension of mmapi.js with custom modules to do some operations before initial CG Request?
+														How do you fetch the generated Experience on a campaign Page?
 													</li>
-													
+													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
+														How do read data from the Client's cookie?
+													</li>
+													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
+														What methods makes it possible to get all the generated Experiences on a Page, from all the 
+														currently generated campaigns? 
+													</li>
+													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
+														Provide CD API method for execution of two asynchronous functions in your code.
+													</li>
+													<li style="line-height: 1.8em; color: #000000; font-size: 10pt;">
+														What are the two possible uses of the CD API '<b>when</b>' method?
+													</li>
 												</ol>
 									</li>
 								</ul>
