@@ -13,7 +13,8 @@
 								"Data Feeds: Questions" : "tasks/Induction_Questionnaire_Overall_Data_Feeds.txt"
 							}
 						},
-						{"Segmentation" : {"Segmentation: Questions" : "tasks/Induction_UI_Knowldge_Final_Questions_Campaign_Level_Segmentation.txt"}}
+						{"Segmentation" : {"Segmentation: Questions" : "tasks/Induction_UI_Knowldge_Final_Questions_Campaign_Level_Segmentation.txt"}},
+						{"CD API" : {"CD API : JS Devs" : "tasks/Induction_CD_API_Questions.txt"}}
 					]
 				}
 	]
